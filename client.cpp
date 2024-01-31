@@ -124,6 +124,9 @@ int main(int argc, char *argv[]) {
         cumulative_messages.at(id) += buffers[id];
       }
 
+      // Detecting short counts doesn't work, since the message can come in
+      // multiple batches. That `recv` returns 0 means EOF, which means the
+      // other side closes the connection,
       if (cqe->res == 0) {
         // CAUTION!! We don't need to submit a new task, so DON'T get a new
         // sqe!!!
