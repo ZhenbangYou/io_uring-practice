@@ -41,8 +41,8 @@ int main(int argc, char *argv[]) {
   const auto start_time = std::chrono::system_clock::now();
 
   io_uring ring;
-  if (io_uring_queue_init(queue_depth, &ring, IORING_SETUP_SQPOLL) <
-      0) { // Ask the kernel to poll the ring buffer
+  if (io_uring_queue_init(queue_depth, &ring, 0) <
+      0) { // Not using kernel polling to prevent race condition
     perror("io_uring_queue_init");
     exit(EXIT_FAILURE);
   }
@@ -58,6 +58,7 @@ int main(int argc, char *argv[]) {
 
   for (int i = 0; i < int(socket_fds.size()); i++) {
     auto sqe = io_uring_get_sqe(&ring);
+    assert(sqe != nullptr);
 
     server_addrs[i].sin_family = AF_INET;
     server_addrs[i].sin_port = htons(PORT);
@@ -84,9 +85,9 @@ int main(int argc, char *argv[]) {
   while (remaining_tasks > 0) {
     io_uring_cqe *cqe;
     auto cq_wait_res = io_uring_wait_cqe(&ring, &cqe);
-    io_uring_cqe_seen(&ring, cqe);
-
     assert(cq_wait_res == 0);
+    assert(cqe != nullptr);
+    io_uring_cqe_seen(&ring, cqe);
 
     int id = int(cqe->user_data);
     int fd = socket_fds.at(id);
