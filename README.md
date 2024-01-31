@@ -19,3 +19,4 @@ g++ -o {name} {name}.cpp -luring -std=c++20
 - C++20 or later
 - liburing
 - Linux at least 5.1 or later (not sure about the earliest version that is supported)
+  - My machine is Linux 5.15
