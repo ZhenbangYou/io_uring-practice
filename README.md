@@ -16,7 +16,7 @@ g++ -o {name} {name}.cpp -luring -std=c++20
 `clang++` also works.
 
 ## Requirement
-- C++20 or later
+- C++ 11 or later
 - liburing
 - Linux at least 5.1 or later (not sure about the earliest version that is supported)
   - My machine is Linux 5.15 with liburing 2.1 (installed by `apt`)
