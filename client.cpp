@@ -11,15 +11,14 @@
 #include <sys/socket.h>
 #include <vector>
 
-constexpr std::string
-    IP_ADDR("142.251.46.228"); // IP address of `www.google.com`
+std::string IP_ADDR("142.251.46.228"); // IP address of `www.google.com`
 constexpr uint16_t PORT = 80;
 std::string GET_REQUEST(
     "GET / HTTP/1.0\r\n\r\n"); // Ask the other side to close the connection,
                                // otherwise there is no way to tell the message
                                // is complete
 constexpr int BUFFER_SIZE = 1024 - 1;
-constexpr std::string OUTPUT_DIR("./out/");
+std::string OUTPUT_DIR("./out/");
 
 enum Status {
   CONNECTING,
