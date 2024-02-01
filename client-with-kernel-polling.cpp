@@ -1,5 +1,6 @@
 /* Async client (kernel polling mode) that fetches multiple Google pages
- * simultaneously */
+ * simultaneously.
+ * Reference: https://unixism.net/loti/tutorial/sq_poll.html */
 
 #include <arpa/inet.h>
 #include <cassert>
