@@ -12,6 +12,7 @@ Thus, here it goes: my journey with `io_uring`.
 ## Usage
 ```
 g++ -o {name} {name}.cpp -luring -std=c++20
+./{name} {#pages}
 ```
 `clang++` also works.
 
